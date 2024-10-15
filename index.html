@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Farell Adrian X RPL 2</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        h1, h2 {
+            color: #333;
+        }
+        .success {
+            color: green;
+        }
+        .error {
+            color: red;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+        th {
+            background-color: #4CAF50;
+            color: white;
+        }
+        td {
+            background-color: #f4f4f4;
+        }
+        tr:nth-child(even) td {
+            background-color: #f9f9f9;
+        }
+        tr:nth-child(odd) td {
+            background-color: #fff;
+        }
+        .first-name {
+            background-color: #e0f7fa;
+        }
+        .last-name {
+            background-color: #ffecb3;
+        }
+        .no-telepon {
+            background-color: #d1c4e9;
+        }
+        .alamat {
+            background-color: #d1c4e9;
+        }
+    </style>
+</head>
+<body>
+    <h1 style="color:blue;">Login dulu bro</h1>
+    <form id="loginForm">
+        <label for="firstName">First Name:</label>
+        <input type="text" id="firstName" name="firstName" required><br><br>
+        <label for="lastName">Last Name:</label>
+        <input type="text" id="lastName" name="lastName" required><br><br>
+        <input type="submit" value="Submit">
+    </form>
+    <p id="resultMessage"></p>
+
+    <h2>Teman Saya</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>No Telepon</th>
+                <th>Alamat</th>
+            </tr>
+        </thead>
+        <tbody id="tableBody">
+            <tr>
+                <td class="first-name">Farell</td>
+                <td class="last-name">Adrian</td>
+                <td class="no-telepon">0812</td>
+                <td class="alamat">Orchard Road (Singapura)</td>
+            </tr>
+            <tr>
+                <td class="first-name">Muhammad</td>
+                <td class="last-name">Faudzi</td>
+                <td class="no-telepon">0819</td>
+                <td class="alamat">Abbey Road (London, Inggris)</td>
+            </tr>
+            <tr>
+                <td class="first-name">Aldi</td>
+                <td class="last-name">Yansyah</td>
+                <td class="no-telepon">0888</td>
+                <td class="alamat">Shibuya Crossing (Tokyo, Jepang)</td>
+            </tr>
+            <tr>
+                <td class="first-name">Zaydane</td>
+                <td class="last-name">Parves</td>
+                <td class="no-telepon">0805</td>
+                <td class="alamat">Via del Corso (Roma, Italia)</td>
+            </tr>
+            <tr>
+                <td class="first-name">Fahri</td>
+                <td class="last-name">Wahyu</td>
+                <td class="no-telepon">0896</td>
+                <td class="alamat">Unter den Linden (Berlin, Jerman)</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const firstName = document.getElementById('firstName').value.trim();
+            const lastName = document.getElementById('lastName').value.trim();
+            const resultMessage = document.getElementById('resultMessage');
+            const tableRows = document.querySelectorAll('#tableBody tr');
+            let nameFound = false;
+
+            if (firstName && lastName) {
+                tableRows.forEach(row => {
+                    const rowFirstName = row.querySelector('.first-name').textContent.toLowerCase();
+                    const rowLastName = row.querySelector('.last-name').textContent.toLowerCase();
+                    if (rowFirstName === firstName.toLowerCase() && rowLastName === lastName.toLowerCase()) {
+                        nameFound = true;
+                    }
+                });
+
+                if (nameFound) {
+                    resultMessage.textContent = 'Submit berhasil!';
+                    resultMessage.className = 'success';
+                    alert('Submit berhasil!');
+                } else {
+                    resultMessage.textContent = 'Nama tidak ditemukan di tabel.';
+                    resultMessage.className = 'error';
+                    alert('Nama tidak ditemukan di tabel.');
+                }
+            } else {
+                resultMessage.textContent = 'Submit gagal. Silakan isi semua field.';
+                resultMessage.className = 'error';
+                alert('Submit gagal. Silakan isi semua field.');
+            }
+        });
+    </script>
+</body>
+</html>
